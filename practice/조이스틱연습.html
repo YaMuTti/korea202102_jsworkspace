@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+    width: 1200px;
+    height: 600px;
+    background: url(../images/background/sandbg.jpg);
+    background-size: 1200px 600px;
+    background-repeat: repeat-x;
+    overflow: hidden;
+    margin: auto;
+    position: relative;
+}
+#tutorial{
+    width: 1200px;
+    height: 200px;
+    background-size: auto;
+    background: dodgerblue;
+    font-size: 30px;
+    margin: auto;
+}
+</style>
+<script>
+var img;
+var x=0;
+var y=200;
+var r=0;
+var bgX=0;
+var st;
+var mv=0;
+var st;
+var flag=true;
+    function init(){
+        img=document.createElement("img"); //동적 변수 img를 create하고 img 변수에 담아준다.
+        wrapper=document.getElementById("wrapper"); //만들어논 wrapper가져와서 
+        img.src="../images/flash.png";
+        img.id="hero";
+        img.style.width=70+"px";
+        img.style.height=80+"px";
+        img.style.left=0+"px";
+        img.style.top=200+"px";
+        img.style.position="absolute";
+        wrapper.appendChild(img);
+    }
+    function auto(){
+        mv--;
+        wrapper.style.backgroundPosition=mv+"px";
+        st=setTimeout ("auto()",10)
+    }
+    function stop(){
+        clearInterval(st);
+    }
+    function joystick(){
+        console.log("너가누른게",event.keyCode);
+        if(event.keyCode==39){
+            x+=10;
+            img.style.left=x+"px";
+        }
+        if(event.keyCode==37){
+            x-=10;
+            img.style.left=x+"px";
+        }
+        if(event.keyCode==40){
+            y+=10;
+            img.style.top=y+"px";
+        }
+        if(event.keyCode==38){
+            y-=10;
+            img.style.top=y+"px";
+        }
+        if(event.keyCode==82){
+            r+=45;
+            img.style.transform="rotate("+r+"deg)";
+        }
+        if(event.keyCode==81){
+            r-=45;
+            img.style.transform="rotate("+r+"deg)";
+        }
+        if(event.keyCode==87){
+            var char=(flag)? "flash" : "hero";
+            img.src="../images/"+char+".png";
+            flag=!flag;
+        }
+    }
+</script>
+</head>
+<body onLoad='init();' onkeydown="joystick();">
+    <div id="wrapper">
+        <button onclick="auto()">배경 움직이기</button>
+        <button onclick="stop()">배경 멈추기</button>
+    </div>
+    <div id="tutorial">
+        <b>키보드방향기: 상↑ / 하↓ / 좌 ← / 우 → </b><br>
+        <b>W</b>:캐릭변환  <br>
+        <b>R</b>:오른쪽 45도 <br>
+        <b>Q</b>:왼쪽 45도  <br>
+    </div>
+</body>
+</html>

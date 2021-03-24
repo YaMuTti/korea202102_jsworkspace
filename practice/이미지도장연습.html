@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{margin: auto;}
+#wrapper{
+    width: 1000px;
+    height: 800px;
+    background: yellow;
+}
+#content{
+    width: 800px;
+    height: 100%;
+    background: dodgerblue;
+    position: relative;
+    float: left;
+    overflow: hidden;
+}
+#menu{
+    width: 200px;
+    height: 100%;
+    background: #cccccc;
+    float: left;
+}
+#menu img{
+    width: 60px;
+    height: 80px;
+    border: solid red;
+}
+</style>
+<script>
+var num=5;
+function stamp(){
+    var img=document.createElement("img")
+    img.src="../images/card/"+num+".png";
+    img.style.width=70+"px";
+    img.style.height=80+"px";
+    img.style.position="absolute";
+    
+    var content = document.getElementById("content")
+    content.appendChild(img)
+    var x = event.clientX;
+    var y = event.clientY;
+
+    img.style.left=x-35+"px";
+    img.style.top=y-40+"px";
+
+
+}
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="content" onmouseup="stamp()">
+
+        </div>
+        <div id="menu">
+            <img src="../images/card/1.png" alt="" onclick="num=1">
+            <img src="../images/card/2.png" alt="" onclick="num=2">
+            <img src="../images/card/3.png" alt="" onclick="num=3">
+            <img src="../images/card/4.png" alt="" onclick="num=4">
+            <img src="../images/card/5.png" alt="" onclick="num=5">
+        </div>
+    </div>
+</body>
+</html>
