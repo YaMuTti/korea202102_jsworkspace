@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+    margin: auto;
+    width: 600px;
+    height: 200px;
+    border: 1px solid red;
+    text-align: center;
+}
+#wrapper input{
+    font-size:120px;
+    width: 150px;
+    text-align: right;
+}
+.boxtext{
+    border: 1px solid red;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: red;
+    cursor: pointer;
+}
+</style>
+<script>
+var t_min;
+var t_sec;
+var sec=0;
+var min=0;
+var hour=0;
+var stop=0;
+function getZeroString(n){ 
+    var result;
+    if(n<10){
+        result="0"+n;
+    }else{
+        result=n;
+    }
+    return result;
+}
+
+function init(){
+    t_min=document.getElementById("t_min");
+    t_sec=document.getElementById("t_sec");
+    t_hour=document.getElementById("t_hour");
+    t_hour.value="0"+0;
+    t_min.value="0"+0;
+    t_sec.value="0"+0;
+}
+function countUp(){
+    sec++;
+    
+    if(sec>=60){
+        sec=0;
+        min++;
+        t_min.value=min;
+    }else if(min>=60){
+        min=0;
+        hour++;
+        t_hour.value=hour;
+    }
+    t_min.value=getZeroString(min);
+    t_hour.value=getZeroString(hour);
+    t_sec.value=getZeroString(sec);
+}
+function auto(){
+    stop=setInterval("countUp()", 1000);
+}
+function reset(){
+    init();
+    sec=0;
+    min=0;
+    hour=0;
+}
+window.addEventListener("load",function(){
+    init();
+});
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <input type="text" id="t_hour">시
+        <input type="text" id="t_min">분
+        <input type="text" id="t_sec">초
+        <p>
+        <!-- <button onClick="countUp()">수동</button> -->
+        <div>
+            <button onClick="auto()" class=boxtext>start</button>
+            <button onClick="clearInterval(stop)" class=boxtext>pause</button>
+            <button onClick="reset()" class=boxtext>clear</button>
+        </div>
+    </div>
+</body>
+</html>

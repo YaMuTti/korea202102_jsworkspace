@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원관리 프로그램</title>
+<style>
+.wrapper{
+    width: 1000px;
+    height: 600px;
+    background:rgb(255, 255, 106);
+    margin: auto;
+    overflow: hidden;
+}
+#regist-area, #detail-area{
+    width: 150px;
+    height: 100%;
+    background:#ccc;
+    float: left;
+}
+#regist-area input, #detail-area input{
+    width: 90%;
+    font-size:18px;
+    border-radius: 5%;
+    background-color: dodgerblue;
+    color: white;
+    border:1px solid black;
+}
+#list-wrapper{
+    width: 700px;
+    height: 100%;
+    float: left;
+}
+</style>
+<script src='../js/font.js'></script>
+<script>
+var listArea;
+var detailArea;
+var t_id, t_name, t_phone, t_money;
+var t_id2, t_name2, t_phone2, t_money2;
+var n;
+
+var memberArray=[]; 
+var memberArray2=[]; 
+
+function regist(){
+    if(isNaN(t_money.value)){
+        alert("숫자만 넣어라^^?");
+        t_money.value="";
+        t_money.focus();
+        return;
+    }
+
+    var member=[]; 
+    member[0]=t_id.value;       //ID예정;
+    member[1]=t_name.value;  //Name예정;
+    member[2]=t_phone.value;  //Phone예정;
+    member[3]=t_money.value;  //Money예정;
+    memberArray.push(member);
+    console.log("총 누적 회원수 ", memberArray.length);
+
+    getList();
+}
+
+function getList(){
+    var tag="<table width=\"100%\" border=\"1\">";
+    tag+="<tr style=\"background:pink\">";
+    tag+="<td>No</td>";
+    tag+="<td>ID</td>";
+    tag+="<td>Name</td>";
+    tag+="<td>Phone</td>";
+    tag+="<td>Money</td>";
+    tag+="</tr>";
+
+    var sum=0;
+
+    for(var i=memberArray.length-1;i>=0;i--){     
+        tag+="<tr onClick=\"t_select("+i+")\">";   
+        tag+="<td>"+(i+1)+"</td>";
+        for(var a=0;a<memberArray[i].length;a++){            
+            tag+="<td>"+memberArray[i][a]+"</td>";
+        }
+            sum = sum + parseInt(memberArray[i][3]);
+            tag+="</tr>";    
+        }
+    tag+="<tr>";
+    tag+="<td colspan='5' align='right'>가입 회원 수:"+memberArray.length+"명 , 누적 자산: "+sum+"원 </td>";
+    tag+="<tr>";
+    tag+="</table>";
+        
+    listArea.innerHTML=tag;
+}
+function init(){
+    listArea = document.getElementById("list-area");
+    
+    t_id = document.getElementById("t_id");
+    t_name = document.getElementById("t_name");
+    t_phone = document.getElementById("t_phone");
+    t_money = document.getElementById("t_money");
+
+    //저장 detailArea = document.getElementById("detail-area");
+
+    t_id2 = document.getElementById("t_id2");
+    t_name2 = document.getElementById("t_name2");
+    t_phone2 = document.getElementById("t_phone2");
+    t_money2 = document.getElementById("t_money2");
+
+    getList();
+}
+function t_select(i){
+    n=i;
+    console.log(i); 
+    t_id2.value=memberArray[i][0];
+    t_name2.value=memberArray[i][1];
+    t_phone2.value=memberArray[i][2];
+    t_money2.value=memberArray[i][3];          //저장        i는 그 방 !!!! / [0,1,2,3] 얘네가 그방안에 사람 끄집어내오는거고!!! 야 1번나와
+}
+function change(){
+    alert("정보를 수정하시겠습니까?");
+    memberArray[n][0]=t_id2.value;
+    memberArray[n][1]=t_name2.value;
+    memberArray[n][2]=t_phone2.value;
+    memberArray[n][3]=t_money2.value; 
+    
+    getList();
+}
+function t_delete(){
+    alert("정보를 삭제하시겠습니까?");
+    memberArray.splice(n,1);
+    getList();
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="regist-area">
+            <input type="text" id="t_id" placeholder="ID 입력">
+            <input type="text" id="t_name" placeholder="이름 입력">
+            <input type="text" id="t_phone" placeholder="연락처 입력">
+            <input type="text" id="t_money" placeholder="현금자산">
+            <button onClick="regist()">등록</button>
+        </div>
+
+        <div id="list-wrapper">
+            <div id="search-area">
+                <select>
+                    <option value="">ID로 검색</option>
+                    <option value="">이름으로 검색</option>
+                </select>
+                <input type="text" placeholder="검색어 입력">
+                <button style='font-size:18px'>
+                    Search <i class='fas fa-search'></i>
+                </button>
+            </div>
+            <div id="list-area"></div>
+        </div>
+        <div id="detail-area">
+            <input type="text" id="t_id2" placeholder="ID 입력">
+            <input type="text" id="t_name2" placeholder="이름 입력">
+            <input type="text" id="t_phone2" placeholder="연락처 입력">
+            <input type="text" id="t_money2" placeholder="현금자산">
+            <button onClick="change()">수정</button>
+            <button onClick="t_delete()">삭제</button>
+        </div>
+    </div>
+</body>
+</html>

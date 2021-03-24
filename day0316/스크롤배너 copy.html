@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+var imgWidth=200;
+var imgHeight=100;
+var gap=5;
+var imgCount=3;
+var container;
+var flag=true;
+
+var imgArray=["a.jpg","b.jpg","c.jpg","d.jpg","e.jpg","f.jpg","g.jpg","h.jpg","i.jpg","j.jpg"];
+var bannerImg=[]; 
+var targetX=0; 
+
+function init(){
+    createFrame();
+    createImg();
+    targetX = (bannerImg.length-1)*(imgWidth+gap);
+    setInterval("flowImg()",10);
+}
+
+function createFrame(){
+    var img = container=document.createElement("div");
+    container.style.background="red";
+    container.style.width=gap+((imgWidth+gap)*imgCount)+"px";
+    container.style.height=(gap*2)+imgHeight+"px";
+    container.style.margin="auto";
+    container.style.position="relative";
+    container.style.overflow="hidden";
+
+    document.body.appendChild(container);
+}
+function createImg(){
+    for(var i=0;i<imgArray.length;i++){ 
+        img = document.createElement("img");
+        img.src="../images/toy/"+imgArray[i];
+        img.style.width=imgWidth+"px";
+        img.style.height=imgHeight+"px";
+
+        img.style.position="absolute";
+        img.style.left=gap+(imgWidth+gap)*i+"px";
+        img.style.top=gap+"px";
+
+        img.addEventListener("mouseover", function(){
+            flag=false;
+        });
+        img.addEventListener("mouseout", function(){
+            flag=true;
+        });
+
+        container.appendChild(img);
+        bannerImg.push(img);
+    }
+}
+function flowImg(){
+    if(flag){
+    for(var i=0;i<bannerImg.length;i++){
+        bannerImg[i].style.left =parseInt(bannerImg[i].style.left) -1+"px";
+        if(parseInt(bannerImg[i].style.left)<-(imgWidth+gap)){
+            console.log("저 도달했어요ㅜㅜ")
+            bannerImg[i].style.left=targetX+"px";
+        }
+    }
+    }
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+</head>
+<body>
+</body>
+</html>

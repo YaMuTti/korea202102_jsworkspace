@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrapper{
+    width: 500px;
+    height: 700px;
+    background-color: yellow;
+    margin: auto;
+}
+#word-area{
+    width: 100%;
+    height: 200px;
+    background-color: cyan;
+    font-size: 100px;
+    text-align: center;
+}
+#input-area{
+    height: 150px;
+}
+#input-area input{
+    width: 98%;
+    height: 100%;
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    font-size: 85px;
+    text-align: center;
+}
+#feedback{
+    width: 100%;
+    height: 200px;
+    font-size: 180px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    background-color: greenyellow;
+}
+#score-area{
+    width: 100%;
+    height: 150px;
+    font-size: 130px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+</style>
+<script>
+var word=["마우스"
+                ,"역삼역"
+                ,"화성"
+                ,"지갑"
+                ,"한국"
+                ,"역병"
+                ,"지옥"
+                ,"파인애플"
+                ,"연필"
+                ,"리모콘"
+                ,"바닐라"];
+var wordArea;
+var inputArea;
+var msg;
+var feedback;
+var scoreArea;
+var index=0;
+var score=0;
+
+function enter(){
+    if(event.keyCode==13){
+        if(index<word.length){
+            index++;
+            if(wordArea.innerText==msg.value){
+                score+=10;
+                feedback.innerText="O";
+            }else if(wordArea.innerText!=msg.value){
+                feedback.innerText="X";
+            }
+            printWord();
+            scoreArea.innerText=score+"점";
+            msg.value="";//초기화
+        }
+        if(index==word.length){
+            wordArea.innerText="게임종료";
+            feedback.innerText="점수";
+        }
+    }
+}
+function init(){
+    wordArea=document.getElementById("word-area");
+    inputArea=document.getElementById("input-area");
+    msg=document.getElementById("msg");
+    feedback=document.getElementById("feedback");
+    scoreArea=document.getElementById("score-area");
+}
+function printWord(){
+    wordArea.innerText=word[index];
+}
+window.addEventListener("load",function(){
+    init();
+    printWord();
+    msg.focus();
+});
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="word-area"></div>
+        <div id="input-area">
+            <input type="text" placeholder="단어입력" onkeyup="enter()" id="msg">
+        </div>
+        <div id="feedback"></div>
+        <div id="score-area">0점</div>
+    </div>
+</body>
+</html>

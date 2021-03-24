@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrapper{
+    width: 600px;
+    margin: auto;
+}
+</style>
+<script>
+window.addEventListener("load", function(){
+    var bt=document.querySelector("button");
+    bt.style.background="blue";
+
+    bt.addEventListener("click", function(){
+        send();
+    });
+})
+function send(){
+    var user_id = document.getElementById("user-id");
+    var pass = document.getElementById("pass");
+    var pass2 = document.getElementById("pass2");
+
+    //console.log("당신이 입력한 아이디는", user_id.value);
+    if(user_id.value==""){
+        alert("아이디 아무것도 안썻는데?");
+        user_id.focus();
+    }else if(pass.value==""){
+        alert("패스워드는 넣어야지..?")
+        pass.focus();
+    }else if(pass.value!=pass2.value){
+        alert("비밀번호 다른데..?")
+        pass2.focus();
+    }else if(document.getElementsByName("agree")[0].checked==false){
+        alert("동의하셔야 가입이 가능해.");
+    }else{
+        var form1 = document.getElementById("form1");
+        form1.action="http://daum.net"; 
+        form1.submit();
+    }
+}
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="form1">
+            <table width="100%" border="5px">
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Your ID..." id="user-id">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="password" placeholder="Your Password..." id="pass"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" placeholder="confirm Password" id="pass2"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="" id="">
+                            <option value="">010</option>
+                            <option value="">011</option>
+                            <option value="">017</option>
+                            <option value="">019</option>
+                        </select>-
+                        <input type="text" placeholder="앞자리">-
+                        <input type="text" placeholder="뒷자리">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="agree" id="" value="yes">동의
+                        <input type="radio" name="agree" id="" checked value="no">동의안함
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button">가입</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

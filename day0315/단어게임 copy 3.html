@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 500px;
+            height: 700px;
+            background-color: yellow;
+            margin: auto;
+        }
+        #word-area{
+            width: 100%;
+            height: 200px;
+            font-size: 100px;
+            text-align: center;
+        }
+        #input-area{
+            width: 100%;
+            height: 150px;
+            text-align: center;
+        }
+        #input-area input{
+            width: 98%;
+            height: 100%;
+            background-color: dodgerblue;
+            color: white;
+            font-weight: bold;
+            font-size: 85px;
+            text-align: center;
+        }
+        #feedback{
+            width: 100%;
+            height: 200px;
+            font-size: 180px;
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            background-color: greenyellow;
+        }
+        #score-area{
+            width: 100%;
+            height: 150px;
+            font-size: 130px;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <script>
+        var wordArea;
+        var inputArea;
+        var feedback;
+        var scoreArea;
+        var msg;
+        var n=0;
+        var score=0;
+        //문제
+        var word=[
+            "힉스입자",
+            "사건",
+            "조하경",
+            "사고실험",
+            "최효주",
+            "김요한",
+            "송미진",
+            "강신혁",
+            "주윤",
+            "이돈엽",
+            "문제 끝"
+        ]
+        //엔터키 인식
+        function enter(){
+            if (event.keyCode==13){
+                n++;
+                printword()
+                msg.value="";
+            }
+        }
+        //게임 초기세팅
+        function init(){
+            wordArea=document.getElementById("word-area");
+            input=document.getElementById("input-area");
+            msg=document.getElementById("msg");
+            feedback=document.getElementById("feedback");
+            scoreArea=document.getElementById("score-area");
+        }
+        //유저가 따라치게될 메세지 초기값
+        function printword(){
+            if(n<word.length){
+                wordArea.innerText=word[n];
+                if(msg.value==word[n-1]){
+                    score+=10;
+                    feedback.innerText="O";
+                }else{
+                    feedback.innerText="X";
+                }
+            }
+            if(n==word.length-1){
+                wordArea.innerText="게임";
+                feedback.innerText="종료";
+                alert("게임종료");
+            }
+            scoreArea.innerText=score+"점";
+        }
+        window.addEventListener("load", function(){
+            init()
+            printword()
+            msg.focus();
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="word-area">단어 출력</div>
+        <div id="input-area">
+            <input type="text" placeholder="단어 입력" onkeyup="enter()" id="msg">
+        </div>
+        <div id="feedback"></div>
+        <div id="score-area">0점</div>
+    </div>
+</body>
+</html>

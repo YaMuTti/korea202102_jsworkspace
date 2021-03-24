@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+    background: url(../images/room.jpg);
+    width: 900px;
+    height: 600px;
+    background-size: 900px 600px;
+    margin: auto;
+    position: relative; /*자식 때문에...*/
+}
+#wrapper img{
+    width: 35px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+#surface{
+    width: 100%;
+    height: 100%;
+    background : black;
+    opacity: 0.8;
+}
+</style>
+<script>
+var flag=true; // 클릭하지 않았을때 기본적으로 실행되는 true
+function turn(){ // 클릭했을때 이 기능을 사용
+    var op=(flag)? 0:0.8; // flag가 true이기 때문에 0 실행하고, 이것을 op에 담는다
+    var offon=(flag)? "on":"off"; // flag가 true이기 때문에 on! 이것은 offon에 담는다
+    document.querySelector("#surface").style.opacity=op; // op는 현재 0 상태이다
+    document.querySelector("img").src="../images/switch_"+offon+".png"; // offon이 on상태이기 때문에 _on으로 대입!
+    flag=!flag; // 가 사실은 아니였다!
+}
+
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="surface"></div>
+        <img src="../images/switch_off.png" alt="" onclick="turn()">
+    </div>
+</body>
+</html>

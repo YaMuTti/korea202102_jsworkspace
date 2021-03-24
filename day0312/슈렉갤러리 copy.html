@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrapper{
+    width: 500px;
+    height: 400px;
+    background: yellow;
+    margin: auto;
+}
+#photo-frame{
+    width: 500px;
+    height: 340px;
+    background: blue;
+    overflow: hidden;
+    position: relative;
+}
+#container{
+    width: 3500px;
+    height: 340px;
+}
+#container img{
+    float: left;
+}
+#navi{
+    text-align: center;
+    font-size:30px;
+}
+#navi a{
+    text-decoration:none;
+}
+#navi a:hover{
+    color: black;
+}
+#navi a:active{
+    color: pink;
+}
+</style>
+<script>
+var targetX=0;
+var container; 
+var a=0.1; 
+var n1=0;
+var n2=0;
+function init(){
+    container = document.getElementById("container");
+    container.style.position="absolute"; 
+    container.style.top=0+"px";
+    container.style.left=0+"px";
+    setInterval("move()", 10);
+}
+function move(){ 
+    container.style.left=parseFloat(container.style.left)+a*(targetX-parseFloat(container.style.left))+"px";
+    n2=((targetX-500)*-1)/500
+    //n2=(targetX*-1/500)+1 다른방법
+    if(n1!=n2){
+        document.getElementById("shu1").style.color="blue";
+        document.getElementById("shu2").style.color="blue";
+        document.getElementById("shu3").style.color="blue";
+        document.getElementById("shu4").style.color="blue";
+        document.getElementById("shu5").style.color="blue";
+        document.getElementById("shu6").style.color="blue";
+        document.getElementById("shu7").style.color="blue";
+        document.getElementById("shu"+n2).style.color="pink";
+        n1=n2
+    }
+}
+function setTarget(x){
+    targetX = x;
+}
+function joystick(){
+    if(event.keyCode==37){
+        if(targetX<0){
+            targetX+=500;
+        }
+    }if(event.keyCode==39){
+        if(targetX>-3000){
+            targetX-=500;
+        }
+    }
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+</head>
+<body onkeydown="joystick();">
+    <div class="wrapper">
+        <div id="photo-frame">
+            <div id="container">
+                <img src="../images/shurek/img0.jpg">
+                <img src="../images/shurek/img1.jpg">
+                <img src="../images/shurek/img2.jpg">
+                <img src="../images/shurek/img3.jpg">
+                <img src="../images/shurek/img4.jpg">
+                <img src="../images/shurek/img5.jpg">
+                <img src="../images/shurek/img6.jpg">
+            </div>
+        </div>
+        <div id="navi">
+            <a href="javascript:setTarget(0)" id="shu1">●</a>
+            <a href="javascript:setTarget(-500)" id="shu2">●</a>
+            <a href="javascript:setTarget(-1000)" id="shu3">●</a>
+            <a href="javascript:setTarget(-1500)" id="shu4">●</a>
+            <a href="javascript:setTarget(-2000)" id="shu5">●</a>
+            <a href="javascript:setTarget(-2500)" id="shu6">●</a>
+            <a href="javascript:setTarget(-3000)" id="shu7">●</a>
+        </div>
+    </div>
+</body>
+</html>

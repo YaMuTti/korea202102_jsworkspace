@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+    <h1>윤달입니다 아닙니다 표시</h1>
+
+<script>
+    var result=prompt("확인하실 년도를 적어주세요");
+    var msg = (result%4==0)? "윤년입":"윤년이아닙" ;
+    document.querySelector("h1").innerText=msg+"니다";
+//1번 : 창을띄운다
+//2번 : 사용자에게 입력받는다
+//3번 : 판단한다
+//4번 : 결과보여주기
+</script>
+</body>
+</html>

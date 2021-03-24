@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#hero{
+    position: absolute; 
+    left: 0px;
+    top: 200px;
+}
+</style>
+<script>
+var x=0; 
+var flag=true;
+function move(){
+    (flag)? x+=10 : x-=10;
+    document.querySelector("h1").innerText="x값:"+x; //숫자도 10씩 증가
+    document.querySelector("#hero").style.left=x+"px"; //10씩 증가로인해 오른쪽(x축)으로 이동한다
+   ((x>=500)||(x<=0))? flag=!flag:0;
+}
+
+</script>
+</head>
+<body>  
+    <button onclick="move()">수동으로 이동</button>
+   <h1>x값:0</h1>
+    <img id="hero" src="../images/hero.png" width="50px">
+</body>
+</html>
