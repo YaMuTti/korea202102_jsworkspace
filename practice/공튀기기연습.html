@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="./Gong.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+var wrapper;
+var ball;
+var balls=[];
+var ballArray=["mon1.webp","mon2.webp","mon3.webp","mon4.webp","mon5.webp","mon6.webp","mon7.webp","mon8.webp","mon9.webp",
+"mon10.webp","mon11.webp","mon12.webp","mon13.webp","mon14.webp"];
+
+function init(){
+    createWall();
+    setInterval("Loop()",50);
+}
+function createWall(){
+    wrapper = document.createElement("div");
+    wrapper.style.width=800+"px";
+    wrapper.style.height=700+"px";
+    wrapper.style.margin="auto";
+    wrapper.style.border=5+"px solid yellow";
+    wrapper.style.position="relative";
+    document.body.appendChild(wrapper);
+}
+function createBall(){
+    ball = new Gong(wrapper, 35, 35, 
+    "../images/ball/"+ballArray[getRandom(ballArray.length)],
+    getRandom(21)+10,getRandom(21)+10);
+    balls.push(ball);
+}
+function space(){
+    if(event.keyCode==32){
+        createBall();
+    }
+}
+function Loop(){
+    for(var i=0;i<balls.length;i++){
+        balls[i].move();
+    }
+}
+window.addEventListener("load", function(){
+    init();
+});
+</script>
+</head>
+<body onkeydown="space()">
+</body>
+</html>

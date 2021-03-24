@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{margin: 0px;}
+.wrapper{
+    width: 1200px;
+    height: 600px;
+    background: green;;
+    overflow: hidden; /*자식이 float되었기 때문에..*/
+}
+#content{
+    width: 1000px;
+    height: 100%;
+    background: yellow;
+    float: left;
+}
+#log{
+    width: 200px;
+    height: 100%;
+    background: #cccccc;
+    float: left;
+}
+</style>
+<script>
+var content;
+var log;
+var n=50;
+var flag=false;
+var recordArray=[];//좌표를 담을 이차원 배열
+
+function init(){
+    content = document.getElementById("content");
+    log = document.getElementById("log");
+    createRect();
+}
+function createRect(){
+    for(var i=0;i<(600/n);i++){
+        for(var a=0;a<(1000/n);a++){
+            var rect = document.createElement("div");
+            rect.style.border=1+"px solid red";
+            rect.style.width=n+"px";
+            rect.style.height=n+"px";
+            rect.style.boxSizing="border-box";
+            rect.style.float="left";
+            rect.id=[i,a];
+            console.log(rect.id);
+
+            content.appendChild(rect);
+
+            rect.addEventListener("click", function(){
+                if(true){
+                    this.style.backgroundColor="red";
+                    var pos = this.id.split(","); 
+                    console.log("난지금"+pos[0]+"층,"+pos[1]+"호입니다");
+                    recordArray.push(pos)
+                    
+                    printLog();
+                }
+            })
+        }
+    }
+}
+function printLog(){
+    var str="";
+    for(var i=0;i<recordArray.length;i++){
+        str = str+"["+recordArray[i][0]+","+recordArray[i][1]+"]\n";
+    }
+    log.innerText=str;
+}
+window.addEventListener("load",function(){
+    init();
+});
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="content"></div>
+        <div id="log"></div>
+    </div>
+    <div>
+        <button>Rec</button>
+        <button>Erase</button>
+        <button>play</button>
+        <button>debug모드</button>
+    </div>
+</body>
+</html>
