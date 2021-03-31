@@ -7,6 +7,7 @@
 <title>진아님살려주세요</title>
 <style>
 #wrapper{ 
+    width: 1000px;
     height: 700px;
     margin: auto;
     background: #cccccc;
@@ -47,7 +48,12 @@ var velY=5;
 var limitX=1000;
 var limitY=700;
 var content;
+var d_red;
 
+function div_1(){
+    d_red=document.getElementById("div1");
+    d_red.style.opacity=1;
+}
 function init(){
     content=document.getElementById("content");
     content.style.width=400+"px";
@@ -57,6 +63,7 @@ function init(){
     content.style.position="absolute";
     createball();
     move();
+    div_1();
 }
 function createball(){
     img = document.createElement("img");
@@ -78,23 +85,23 @@ function move(){
     var content_right = parseInt(content.style.left)+parseInt(content.style.width); //콘텐츠 우
     var content_top = parseInt(content.style.top); //콘텐츠 위
     var content_bottom = parseInt(content.style.top)+parseInt(content.style.height); //콘텐츠 아래
-    
+   
         if(ball_right==content_left && ball_top>=content_top && ball_bottom<=content_bottom 
         && ball_right < content_right){
             velX = -5;
-            div1.style.opacity = 0.3;
+            d_red.style.opacity = d_red.style.opacity - 0.1;
+            
         }else if(ball_left==content_right && ball_top>=content_top && ball_bottom<=content_bottom 
         && ball_left > content_left){
             velX = 5;
-            div2.style.opacity = 0.3;
+            
         }else if(ball_bottom==content_top && ball_left>=content_left && ball_right<=content_right 
         && ball_bottom < content_bottom){
             velY = -5;
-            div3.style.opacity = 0.3;
+            
         }else if(ball_top==content_bottom && ball_left>=content_left && ball_right<=content_right 
         && ball_top > content_top){
             velY = 5;
-            div4.style.opacity = 0.3;
         }
         x = x + velX;
         y = y + velY;
